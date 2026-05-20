@@ -1,0 +1,31 @@
+incident_id,severity,department,service,description,status,date,assigned_to
+INC0001,Medium,Engineering,db-replica,Config change deployed to auth-service by admin,Open,2024-12-30,dave@acmecorp.com
+INC0002,Medium,IT Operations,payment-gateway,Disk usage on db-replica at 77%,Open,2024-12-31,dave@acmecorp.com
+INC0003,High,Security,auth-service,Health check passed for file-storage,In Progress,2024-12-10,dave@acmecorp.com
+INC0004,Medium,Security,payment-gateway,Health check passed for reporting-service,In Progress,2024-12-12,dave@acmecorp.com
+INC0005,High,IT Operations,file-storage,CPU spike detected on file-storage (usage: 81%),Closed,2024-12-19,dave@acmecorp.com
+INC0006,Low,IT Operations,reporting-service,SSL certificate for api-gateway expires in 25 days,Closed,2024-12-29,dave@acmecorp.com
+INC0007,Medium,Engineering,reporting-service,Health check passed for payment-gateway,In Progress,2024-12-30,dave@acmecorp.com
+INC0008,Medium,IT Operations,payment-gateway,Scheduled backup completed successfully on file-storage,Closed,2024-12-03,dave@acmecorp.com
+INC0009,Low,IT Operations,cache-redis,Rate limit triggered on payment-gateway: 797 requests/min,Closed,2024-12-10,dave@acmecorp.com
+INC0010,Low,IT Operations,auth-service,Service db-primary restarted after OOM kill,Resolved,2024-12-05,dave@acmecorp.com
+INC0011,Low,Engineering,db-replica,Service payment-gateway restarted after OOM kill,Closed,2024-12-28,dave@acmecorp.com
+INC0012,Medium,Engineering,db-primary,Config change deployed to db-replica by admin,In Progress,2024-12-01,dave@acmecorp.com
+INC0013,Medium,Security,api-gateway,Latency spike: reporting-service P99 = 3932ms (threshold: 500ms),Resolved,2024-12-31,dave@acmecorp.com
+INC0014,High,Security,file-storage,Config change deployed to auth-service by admin,Open,2024-12-16,dave@acmecorp.com
+INC0015,Medium,IT Operations,user-service,Memory usage high on user-service (89% of 16 GB),Open,2024-12-01,dave@acmecorp.com
+INC0016,Medium,Security,payment-gateway,Failed login attempt on file-storage from IP 192.168.158.97,Resolved,2024-12-31,dave@acmecorp.com
+INC0017,Medium,IT Operations,cache-redis,Memory usage high on payment-gateway (90% of 16 GB),In Progress,2024-12-04,dave@acmecorp.com
+INC0018,Low,IT Operations,cache-redis,Rate limit triggered on api-gateway: 640 requests/min,Resolved,2024-12-05,dave@acmecorp.com
+INC0019,Medium,IT Operations,email-worker,Latency spike: payment-gateway P99 = 2639ms (threshold: 500ms),Resolved,2024-12-25,dave@acmecorp.com
+INC0020,High,Security,email-worker,Failed login attempt on user-service from IP 192.168.207.62,Closed,2024-12-24,dave@acmecorp.com
+INC0021,Low,Engineering,email-worker,Service db-primary restarted after OOM kill,Resolved,2024-12-07,dave@acmecorp.com
+INC0022,Low,IT Operations,cache-redis,Rate limit triggered on db-primary: 581 requests/min,In Progress,2024-12-11,dave@acmecorp.com
+INC0023,High,Security,file-storage,CPU spike detected on cache-redis (usage: 95%),Closed,2024-12-26,dave@acmecorp.com
+INC0024,Low,Engineering,cache-redis,Database connection pool exhausted on db-replica,Closed,2024-12-15,dave@acmecorp.com
+INC0025,Medium,IT Operations,api-gateway,Database connection pool exhausted on api-gateway,Closed,2024-12-22,dave@acmecorp.com
+INC0026,Low,Engineering,email-worker,Scheduled backup completed successfully on api-gateway,Closed,2024-12-28,dave@acmecorp.com
+INC0027,High,Engineering,auth-service,Latency spike: user-service P99 = 2470ms (threshold: 500ms),Resolved,2024-12-18,dave@acmecorp.com
+INC0028,Medium,Engineering,auth-service,Rate limit triggered on db-primary: 999 requests/min,In Progress,2024-12-18,dave@acmecorp.com
+INC0029,High,Security,auth-service,Service api-gateway restarted after OOM kill,Open,2024-12-18,dave@acmecorp.com
+INC0030,Critical,Security,email-worker,Scheduled backup completed successfully on cache-redis,Open,2024-12-25,dave@acmecorp.com

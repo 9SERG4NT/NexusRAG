@@ -1,0 +1,21 @@
+# ── Core RAG stack ────────────────────────────────────────────────────────────
+chainlit==2.11.1
+sentence-transformers==2.7.0
+chromadb==0.5.3
+rank-bm25==0.2.2
+huggingface-hub>=0.23.0
+
+# ── Data ingestion ────────────────────────────────────────────────────────────
+fpdf2==2.7.9
+pypdf>=4.0.0
+pandas==2.2.2
+
+# ── LLM providers (optional — only HF is used by default) ────────────────────
+anthropic>=0.25.0
+openai>=1.0.0
+
+# ── Web / utilities ───────────────────────────────────────────────────────────
+fastapi==0.111.0
+uvicorn==0.30.0
+python-dotenv==1.0.1
+pydantic>=2.0.0

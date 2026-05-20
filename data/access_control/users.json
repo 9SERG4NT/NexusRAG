@@ -1,0 +1,7 @@
+{
+  "alice": "admin",
+  "bob":   "hr_staff",
+  "carol": "finance",
+  "dave":  "it_ops",
+  "eve":   "employee"
+}

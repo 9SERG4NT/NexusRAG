@@ -1,0 +1,702 @@
+[
+  {
+    "timestamp": "2024-12-15T00:08:00",
+    "level": "ERROR",
+    "service": "payment-gateway",
+    "message": "Payment declined: txn_id=TXN309794, reason=insufficient_funds",
+    "host": "prod-payment-gateway-01"
+  },
+  {
+    "timestamp": "2024-12-15T00:27:00",
+    "level": "INFO",
+    "service": "api-gateway",
+    "message": "Deployment v3.4.1 rolled out to production (302 instances)",
+    "host": "prod-api-gateway-02"
+  },
+  {
+    "timestamp": "2024-12-15T00:29:00",
+    "level": "CRITICAL",
+    "service": "auth-service",
+    "message": "Multiple failed login attempts from IP 10.0.243.184 - account locked",
+    "host": "prod-auth-service-04"
+  },
+  {
+    "timestamp": "2024-12-15T00:50:00",
+    "level": "INFO",
+    "service": "user-service",
+    "message": "Profile updated for user_id=U7596",
+    "host": "prod-user-service-02"
+  },
+  {
+    "timestamp": "2024-12-15T01:05:00",
+    "level": "INFO",
+    "service": "api-gateway",
+    "message": "Deployment v3.4.1 rolled out to production (488 instances)",
+    "host": "prod-api-gateway-02"
+  },
+  {
+    "timestamp": "2024-12-15T01:20:00",
+    "level": "CRITICAL",
+    "service": "auth-service",
+    "message": "Brute-force attack detected - WAF rule triggered, IP blocked",
+    "host": "prod-auth-service-01"
+  },
+  {
+    "timestamp": "2024-12-15T01:31:00",
+    "level": "CRITICAL",
+    "service": "auth-service",
+    "message": "Multiple failed login attempts from IP 10.0.104.52 - account locked",
+    "host": "prod-auth-service-03"
+  },
+  {
+    "timestamp": "2024-12-15T01:51:00",
+    "level": "INFO",
+    "service": "reporting-service",
+    "message": "Scheduled job 'daily_summary' completed successfully",
+    "host": "prod-reporting-service-02"
+  },
+  {
+    "timestamp": "2024-12-15T01:55:00",
+    "level": "INFO",
+    "service": "api-gateway",
+    "message": "Deployment v3.4.1 rolled out to production (152 instances)",
+    "host": "prod-api-gateway-03"
+  },
+  {
+    "timestamp": "2024-12-15T02:06:00",
+    "level": "INFO",
+    "service": "cache-redis",
+    "message": "Cache eviction: 422 keys removed (LRU policy)",
+    "host": "prod-cache-redis-01"
+  },
+  {
+    "timestamp": "2024-12-15T02:22:00",
+    "level": "INFO",
+    "service": "user-service",
+    "message": "Profile updated for user_id=U4544",
+    "host": "prod-user-service-01"
+  },
+  {
+    "timestamp": "2024-12-15T02:47:00",
+    "level": "WARNING",
+    "service": "api-gateway",
+    "message": "Rate limit approaching for client_id=U7530 (438/1000 req/min)",
+    "host": "prod-api-gateway-03"
+  },
+  {
+    "timestamp": "2024-12-15T02:52:00",
+    "level": "WARNING",
+    "service": "cache-redis",
+    "message": "Cache hit rate dropped to 45% (threshold: 70%)",
+    "host": "prod-cache-redis-01"
+  },
+  {
+    "timestamp": "2024-12-15T03:06:00",
+    "level": "CRITICAL",
+    "service": "auth-service",
+    "message": "Brute-force attack detected - WAF rule triggered, IP blocked",
+    "host": "prod-auth-service-04"
+  },
+  {
+    "timestamp": "2024-12-15T03:19:00",
+    "level": "INFO",
+    "service": "api-gateway",
+    "message": "Deployment v3.4.1 rolled out to production (310 instances)",
+    "host": "prod-api-gateway-04"
+  },
+  {
+    "timestamp": "2024-12-15T03:40:00",
+    "level": "INFO",
+    "service": "user-service",
+    "message": "Profile updated for user_id=U4238",
+    "host": "prod-user-service-02"
+  },
+  {
+    "timestamp": "2024-12-15T03:44:00",
+    "level": "INFO",
+    "service": "file-storage",
+    "message": "File uploaded: report_45.pdf (32.9MB) by user U7827",
+    "host": "prod-file-storage-01"
+  },
+  {
+    "timestamp": "2024-12-15T04:10:00",
+    "level": "CRITICAL",
+    "service": "auth-service",
+    "message": "Brute-force attack detected - WAF rule triggered, IP blocked",
+    "host": "prod-auth-service-04"
+  },
+  {
+    "timestamp": "2024-12-15T04:25:00",
+    "level": "WARNING",
+    "service": "cache-redis",
+    "message": "Cache hit rate dropped to 75% (threshold: 70%)",
+    "host": "prod-cache-redis-03"
+  },
+  {
+    "timestamp": "2024-12-15T04:34:00",
+    "level": "WARNING",
+    "service": "cache-redis",
+    "message": "Cache hit rate dropped to 42% (threshold: 70%)",
+    "host": "prod-cache-redis-03"
+  },
+  {
+    "timestamp": "2024-12-15T04:47:00",
+    "level": "WARNING",
+    "service": "cache-redis",
+    "message": "Cache hit rate dropped to 56% (threshold: 70%)",
+    "host": "prod-cache-redis-04"
+  },
+  {
+    "timestamp": "2024-12-15T05:07:00",
+    "level": "INFO",
+    "service": "auth-service",
+    "message": "Password reset completed for user_id=U3930",
+    "host": "prod-auth-service-04"
+  },
+  {
+    "timestamp": "2024-12-15T05:20:00",
+    "level": "ERROR",
+    "service": "file-storage",
+    "message": "Disk usage at 55% - alert sent to IT Operations",
+    "host": "prod-file-storage-04"
+  },
+  {
+    "timestamp": "2024-12-15T05:28:00",
+    "level": "WARNING",
+    "service": "api-gateway",
+    "message": "High latency detected: 4716ms on /api/v2/reports",
+    "host": "prod-api-gateway-03"
+  },
+  {
+    "timestamp": "2024-12-15T05:40:00",
+    "level": "INFO",
+    "service": "reporting-service",
+    "message": "Report generation completed in 3304ms",
+    "host": "prod-reporting-service-02"
+  },
+  {
+    "timestamp": "2024-12-15T06:00:00",
+    "level": "WARNING",
+    "service": "db-primary",
+    "message": "Slow query detected (1930ms): SELECT * FROM audit_logs WHERE...",
+    "host": "prod-db-primary-03"
+  },
+  {
+    "timestamp": "2024-12-15T06:14:00",
+    "level": "WARNING",
+    "service": "api-gateway",
+    "message": "High latency detected: 5799ms on /api/v2/reports",
+    "host": "prod-api-gateway-01"
+  },
+  {
+    "timestamp": "2024-12-15T06:30:00",
+    "level": "CRITICAL",
+    "service": "auth-service",
+    "message": "Multiple failed login attempts from IP 10.0.166.98 - account locked",
+    "host": "prod-auth-service-02"
+  },
+  {
+    "timestamp": "2024-12-15T06:43:00",
+    "level": "INFO",
+    "service": "api-gateway",
+    "message": "Deployment v3.4.1 rolled out to production (176 instances)",
+    "host": "prod-api-gateway-01"
+  },
+  {
+    "timestamp": "2024-12-15T06:58:00",
+    "level": "CRITICAL",
+    "service": "auth-service",
+    "message": "Multiple failed login attempts from IP 10.0.60.97 - account locked",
+    "host": "prod-auth-service-02"
+  },
+  {
+    "timestamp": "2024-12-15T07:13:00",
+    "level": "ERROR",
+    "service": "file-storage",
+    "message": "Disk usage at 45% - alert sent to IT Operations",
+    "host": "prod-file-storage-02"
+  },
+  {
+    "timestamp": "2024-12-15T07:14:00",
+    "level": "WARNING",
+    "service": "db-primary",
+    "message": "Slow query detected (423ms): SELECT * FROM audit_logs WHERE...",
+    "host": "prod-db-primary-03"
+  },
+  {
+    "timestamp": "2024-12-15T07:33:00",
+    "level": "INFO",
+    "service": "reporting-service",
+    "message": "Scheduled job 'daily_summary' completed successfully",
+    "host": "prod-reporting-service-03"
+  },
+  {
+    "timestamp": "2024-12-15T07:55:00",
+    "level": "INFO",
+    "service": "user-service",
+    "message": "Profile updated for user_id=U1566",
+    "host": "prod-user-service-03"
+  },
+  {
+    "timestamp": "2024-12-15T08:06:00",
+    "level": "ERROR",
+    "service": "payment-gateway",
+    "message": "Payment declined: txn_id=TXN637156, reason=insufficient_funds",
+    "host": "prod-payment-gateway-03"
+  },
+  {
+    "timestamp": "2024-12-15T08:10:00",
+    "level": "INFO",
+    "service": "reporting-service",
+    "message": "Report generation completed in 7780ms",
+    "host": "prod-reporting-service-03"
+  },
+  {
+    "timestamp": "2024-12-15T08:33:00",
+    "level": "INFO",
+    "service": "reporting-service",
+    "message": "Report generation completed in 5322ms",
+    "host": "prod-reporting-service-02"
+  },
+  {
+    "timestamp": "2024-12-15T08:45:00",
+    "level": "INFO",
+    "service": "user-service",
+    "message": "Profile updated for user_id=U8121",
+    "host": "prod-user-service-02"
+  },
+  {
+    "timestamp": "2024-12-15T09:02:00",
+    "level": "ERROR",
+    "service": "db-primary",
+    "message": "Connection timeout after 30s - retrying (89/3)",
+    "host": "prod-db-primary-03"
+  },
+  {
+    "timestamp": "2024-12-15T09:09:00",
+    "level": "INFO",
+    "service": "reporting-service",
+    "message": "Report generation completed in 7562ms",
+    "host": "prod-reporting-service-04"
+  },
+  {
+    "timestamp": "2024-12-15T09:32:00",
+    "level": "ERROR",
+    "service": "payment-gateway",
+    "message": "Payment declined: txn_id=TXN688673, reason=insufficient_funds",
+    "host": "prod-payment-gateway-01"
+  },
+  {
+    "timestamp": "2024-12-15T09:44:00",
+    "level": "INFO",
+    "service": "payment-gateway",
+    "message": "Payment processed: txn_id=TXN165172, amount=$1582.8",
+    "host": "prod-payment-gateway-03"
+  },
+  {
+    "timestamp": "2024-12-15T09:56:00",
+    "level": "INFO",
+    "service": "auth-service",
+    "message": "User login successful for user_id=U9688",
+    "host": "prod-auth-service-03"
+  },
+  {
+    "timestamp": "2024-12-15T10:08:00",
+    "level": "WARNING",
+    "service": "cache-redis",
+    "message": "Cache hit rate dropped to 54% (threshold: 70%)",
+    "host": "prod-cache-redis-01"
+  },
+  {
+    "timestamp": "2024-12-15T10:21:00",
+    "level": "WARNING",
+    "service": "api-gateway",
+    "message": "Rate limit approaching for client_id=U6209 (400/1000 req/min)",
+    "host": "prod-api-gateway-03"
+  },
+  {
+    "timestamp": "2024-12-15T10:36:00",
+    "level": "WARNING",
+    "service": "api-gateway",
+    "message": "High latency detected: 3620ms on /api/v2/reports",
+    "host": "prod-api-gateway-04"
+  },
+  {
+    "timestamp": "2024-12-15T10:47:00",
+    "level": "INFO",
+    "service": "reporting-service",
+    "message": "Scheduled job 'daily_summary' completed successfully",
+    "host": "prod-reporting-service-03"
+  },
+  {
+    "timestamp": "2024-12-15T10:58:00",
+    "level": "INFO",
+    "service": "user-service",
+    "message": "Profile updated for user_id=U2678",
+    "host": "prod-user-service-03"
+  },
+  {
+    "timestamp": "2024-12-15T11:24:00",
+    "level": "WARNING",
+    "service": "api-gateway",
+    "message": "High latency detected: 2362ms on /api/v2/reports",
+    "host": "prod-api-gateway-03"
+  },
+  {
+    "timestamp": "2024-12-15T11:29:00",
+    "level": "CRITICAL",
+    "service": "auth-service",
+    "message": "Brute-force attack detected - WAF rule triggered, IP blocked",
+    "host": "prod-auth-service-01"
+  },
+  {
+    "timestamp": "2024-12-15T11:50:00",
+    "level": "ERROR",
+    "service": "file-storage",
+    "message": "Disk usage at 45% - alert sent to IT Operations",
+    "host": "prod-file-storage-02"
+  },
+  {
+    "timestamp": "2024-12-15T11:57:00",
+    "level": "INFO",
+    "service": "auth-service",
+    "message": "Password reset completed for user_id=U4151",
+    "host": "prod-auth-service-02"
+  },
+  {
+    "timestamp": "2024-12-15T12:10:00",
+    "level": "ERROR",
+    "service": "db-primary",
+    "message": "Connection timeout after 30s - retrying (147/3)",
+    "host": "prod-db-primary-04"
+  },
+  {
+    "timestamp": "2024-12-15T12:26:00",
+    "level": "ERROR",
+    "service": "db-primary",
+    "message": "Connection timeout after 30s - retrying (198/3)",
+    "host": "prod-db-primary-03"
+  },
+  {
+    "timestamp": "2024-12-15T12:40:00",
+    "level": "INFO",
+    "service": "reporting-service",
+    "message": "Report generation completed in 6182ms",
+    "host": "prod-reporting-service-04"
+  },
+  {
+    "timestamp": "2024-12-15T12:53:00",
+    "level": "WARNING",
+    "service": "cache-redis",
+    "message": "Cache hit rate dropped to 56% (threshold: 70%)",
+    "host": "prod-cache-redis-03"
+  },
+  {
+    "timestamp": "2024-12-15T13:16:00",
+    "level": "CRITICAL",
+    "service": "auth-service",
+    "message": "Brute-force attack detected - WAF rule triggered, IP blocked",
+    "host": "prod-auth-service-02"
+  },
+  {
+    "timestamp": "2024-12-15T13:24:00",
+    "level": "ERROR",
+    "service": "file-storage",
+    "message": "Disk usage at 77% - alert sent to IT Operations",
+    "host": "prod-file-storage-04"
+  },
+  {
+    "timestamp": "2024-12-15T13:43:00",
+    "level": "ERROR",
+    "service": "db-primary",
+    "message": "Connection timeout after 30s - retrying (46/3)",
+    "host": "prod-db-primary-03"
+  },
+  {
+    "timestamp": "2024-12-15T13:59:00",
+    "level": "CRITICAL",
+    "service": "db-replica",
+    "message": "Replication lag exceeds 30 seconds \u2014 failover triggered",
+    "host": "prod-db-replica-02"
+  },
+  {
+    "timestamp": "2024-12-15T14:05:00",
+    "level": "CRITICAL",
+    "service": "db-replica",
+    "message": "Replication lag exceeds 30 seconds \u2014 failover triggered",
+    "host": "prod-db-replica-02"
+  },
+  {
+    "timestamp": "2024-12-15T14:24:00",
+    "level": "INFO",
+    "service": "payment-gateway",
+    "message": "Payment processed: txn_id=TXN829557, amount=$4564.21",
+    "host": "prod-payment-gateway-04"
+  },
+  {
+    "timestamp": "2024-12-15T14:28:00",
+    "level": "INFO",
+    "service": "cache-redis",
+    "message": "Cache eviction: 373 keys removed (LRU policy)",
+    "host": "prod-cache-redis-03"
+  },
+  {
+    "timestamp": "2024-12-15T14:47:00",
+    "level": "CRITICAL",
+    "service": "auth-service",
+    "message": "Multiple failed login attempts from IP 10.0.143.75 - account locked",
+    "host": "prod-auth-service-01"
+  },
+  {
+    "timestamp": "2024-12-15T14:57:00",
+    "level": "INFO",
+    "service": "reporting-service",
+    "message": "Scheduled job 'daily_summary' completed successfully",
+    "host": "prod-reporting-service-04"
+  },
+  {
+    "timestamp": "2024-12-15T15:13:00",
+    "level": "ERROR",
+    "service": "payment-gateway",
+    "message": "Payment declined: txn_id=TXN670540, reason=insufficient_funds",
+    "host": "prod-payment-gateway-03"
+  },
+  {
+    "timestamp": "2024-12-15T15:25:00",
+    "level": "CRITICAL",
+    "service": "auth-service",
+    "message": "Multiple failed login attempts from IP 10.0.100.81 - account locked",
+    "host": "prod-auth-service-03"
+  },
+  {
+    "timestamp": "2024-12-15T15:50:00",
+    "level": "INFO",
+    "service": "file-storage",
+    "message": "File uploaded: report_90.pdf (33.1MB) by user U7681",
+    "host": "prod-file-storage-01"
+  },
+  {
+    "timestamp": "2024-12-15T16:03:00",
+    "level": "INFO",
+    "service": "reporting-service",
+    "message": "Scheduled job 'daily_summary' completed successfully",
+    "host": "prod-reporting-service-04"
+  },
+  {
+    "timestamp": "2024-12-15T16:14:00",
+    "level": "WARNING",
+    "service": "api-gateway",
+    "message": "High latency detected: 1921ms on /api/v2/reports",
+    "host": "prod-api-gateway-01"
+  },
+  {
+    "timestamp": "2024-12-15T16:25:00",
+    "level": "CRITICAL",
+    "service": "auth-service",
+    "message": "Multiple failed login attempts from IP 10.0.245.34 - account locked",
+    "host": "prod-auth-service-01"
+  },
+  {
+    "timestamp": "2024-12-15T16:41:00",
+    "level": "WARNING",
+    "service": "api-gateway",
+    "message": "High latency detected: 6070ms on /api/v2/reports",
+    "host": "prod-api-gateway-04"
+  },
+  {
+    "timestamp": "2024-12-15T17:00:00",
+    "level": "INFO",
+    "service": "auth-service",
+    "message": "User login successful for user_id=U4549",
+    "host": "prod-auth-service-04"
+  },
+  {
+    "timestamp": "2024-12-15T17:11:00",
+    "level": "CRITICAL",
+    "service": "db-replica",
+    "message": "Replication lag exceeds 30 seconds \u2014 failover triggered",
+    "host": "prod-db-replica-04"
+  },
+  {
+    "timestamp": "2024-12-15T17:28:00",
+    "level": "WARNING",
+    "service": "api-gateway",
+    "message": "Rate limit approaching for client_id=U9163 (179/1000 req/min)",
+    "host": "prod-api-gateway-03"
+  },
+  {
+    "timestamp": "2024-12-15T17:43:00",
+    "level": "ERROR",
+    "service": "file-storage",
+    "message": "Disk usage at 83% - alert sent to IT Operations",
+    "host": "prod-file-storage-01"
+  },
+  {
+    "timestamp": "2024-12-15T17:44:00",
+    "level": "ERROR",
+    "service": "payment-gateway",
+    "message": "Payment declined: txn_id=TXN855361, reason=insufficient_funds",
+    "host": "prod-payment-gateway-03"
+  },
+  {
+    "timestamp": "2024-12-15T18:03:00",
+    "level": "ERROR",
+    "service": "email-worker",
+    "message": "SMTP connection refused - queued 431 messages",
+    "host": "prod-email-worker-04"
+  },
+  {
+    "timestamp": "2024-12-15T18:16:00",
+    "level": "WARNING",
+    "service": "api-gateway",
+    "message": "Rate limit approaching for client_id=U7571 (401/1000 req/min)",
+    "host": "prod-api-gateway-04"
+  },
+  {
+    "timestamp": "2024-12-15T18:28:00",
+    "level": "INFO",
+    "service": "user-service",
+    "message": "Profile updated for user_id=U3905",
+    "host": "prod-user-service-04"
+  },
+  {
+    "timestamp": "2024-12-15T18:43:00",
+    "level": "WARNING",
+    "service": "cache-redis",
+    "message": "Cache hit rate dropped to 89% (threshold: 70%)",
+    "host": "prod-cache-redis-01"
+  },
+  {
+    "timestamp": "2024-12-15T18:57:00",
+    "level": "WARNING",
+    "service": "api-gateway",
+    "message": "High latency detected: 6560ms on /api/v2/reports",
+    "host": "prod-api-gateway-03"
+  },
+  {
+    "timestamp": "2024-12-15T19:15:00",
+    "level": "WARNING",
+    "service": "api-gateway",
+    "message": "High latency detected: 755ms on /api/v2/reports",
+    "host": "prod-api-gateway-03"
+  },
+  {
+    "timestamp": "2024-12-15T19:33:00",
+    "level": "CRITICAL",
+    "service": "auth-service",
+    "message": "Brute-force attack detected - WAF rule triggered, IP blocked",
+    "host": "prod-auth-service-02"
+  },
+  {
+    "timestamp": "2024-12-15T19:43:00",
+    "level": "INFO",
+    "service": "api-gateway",
+    "message": "Deployment v3.4.1 rolled out to production (432 instances)",
+    "host": "prod-api-gateway-04"
+  },
+  {
+    "timestamp": "2024-12-15T19:51:00",
+    "level": "INFO",
+    "service": "api-gateway",
+    "message": "Deployment v3.4.1 rolled out to production (399 instances)",
+    "host": "prod-api-gateway-03"
+  },
+  {
+    "timestamp": "2024-12-15T20:16:00",
+    "level": "INFO",
+    "service": "cache-redis",
+    "message": "Cache eviction: 161 keys removed (LRU policy)",
+    "host": "prod-cache-redis-01"
+  },
+  {
+    "timestamp": "2024-12-15T20:21:00",
+    "level": "INFO",
+    "service": "reporting-service",
+    "message": "Scheduled job 'daily_summary' completed successfully",
+    "host": "prod-reporting-service-03"
+  },
+  {
+    "timestamp": "2024-12-15T20:41:00",
+    "level": "INFO",
+    "service": "auth-service",
+    "message": "User login successful for user_id=U6667",
+    "host": "prod-auth-service-02"
+  },
+  {
+    "timestamp": "2024-12-15T20:51:00",
+    "level": "WARNING",
+    "service": "cache-redis",
+    "message": "Cache hit rate dropped to 70% (threshold: 70%)",
+    "host": "prod-cache-redis-02"
+  },
+  {
+    "timestamp": "2024-12-15T21:06:00",
+    "level": "CRITICAL",
+    "service": "db-replica",
+    "message": "Replication lag exceeds 30 seconds \u2014 failover triggered",
+    "host": "prod-db-replica-03"
+  },
+  {
+    "timestamp": "2024-12-15T21:21:00",
+    "level": "WARNING",
+    "service": "api-gateway",
+    "message": "Rate limit approaching for client_id=U6572 (172/1000 req/min)",
+    "host": "prod-api-gateway-01"
+  },
+  {
+    "timestamp": "2024-12-15T21:39:00",
+    "level": "INFO",
+    "service": "cache-redis",
+    "message": "Cache eviction: 170 keys removed (LRU policy)",
+    "host": "prod-cache-redis-03"
+  },
+  {
+    "timestamp": "2024-12-15T21:46:00",
+    "level": "INFO",
+    "service": "auth-service",
+    "message": "User login successful for user_id=U3865",
+    "host": "prod-auth-service-04"
+  },
+  {
+    "timestamp": "2024-12-15T22:08:00",
+    "level": "INFO",
+    "service": "reporting-service",
+    "message": "Report generation completed in 7517ms",
+    "host": "prod-reporting-service-01"
+  },
+  {
+    "timestamp": "2024-12-15T22:22:00",
+    "level": "WARNING",
+    "service": "cache-redis",
+    "message": "Cache hit rate dropped to 94% (threshold: 70%)",
+    "host": "prod-cache-redis-04"
+  },
+  {
+    "timestamp": "2024-12-15T22:35:00",
+    "level": "INFO",
+    "service": "reporting-service",
+    "message": "Report generation completed in 3138ms",
+    "host": "prod-reporting-service-01"
+  },
+  {
+    "timestamp": "2024-12-15T22:47:00",
+    "level": "INFO",
+    "service": "payment-gateway",
+    "message": "Payment processed: txn_id=TXN134541, amount=$1532.95",
+    "host": "prod-payment-gateway-03"
+  },
+  {
+    "timestamp": "2024-12-15T23:00:00",
+    "level": "ERROR",
+    "service": "email-worker",
+    "message": "SMTP connection refused - queued 221 messages",
+    "host": "prod-email-worker-02"
+  },
+  {
+    "timestamp": "2024-12-15T23:12:00",
+    "level": "INFO",
+    "service": "auth-service",
+    "message": "User login successful for user_id=U4159",
+    "host": "prod-auth-service-04"
+  }
+]

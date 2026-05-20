@@ -1,0 +1,32 @@
+[project]
+name            = "NexusRAG"
+enable_telemetry = false
+
+[features]
+prompt_playground     = false
+unsafe_allow_html     = true
+latex                 = false
+spontaneous_file_upload.enabled = false
+
+[UI]
+name                     = "NexusRAG — Enterprise Intelligence"
+description              = "Secure multi-source RAG · RBAC · Powered by Qwen2.5"
+show_readme_as_default   = false
+default_collapse_content = true
+hide_cot                 = false
+default_theme            = "dark"
+custom_css               = "/public/custom.css"
+custom_js                = "/public/custom.js"
+
+  [UI.theme.dark]
+  background = "#0f1117"
+  paper      = "#1a1d27"
+  primary    = "#6366f1"
+
+  [UI.theme.light]
+  background = "#f0f4f9"
+  paper      = "#ffffff"
+  primary    = "#4f46e5"
+
+[meta]
+generated_by = "nexusrag-1.0"

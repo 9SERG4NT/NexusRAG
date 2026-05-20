@@ -1,0 +1,7 @@
+{
+  "admin":    { "can_access": ["hr", "finance", "it", "logs", "employees", "incidents", "general"] },
+  "hr_staff": { "can_access": ["hr", "employees", "general"] },
+  "finance":  { "can_access": ["finance", "employees", "general"] },
+  "it_ops":   { "can_access": ["it", "logs", "incidents", "general"] },
+  "employee": { "can_access": ["hr", "general"] }
+}

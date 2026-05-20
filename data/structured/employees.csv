@@ -1,0 +1,51 @@
+employee_id,name,department,role,salary,start_date,status
+EMP0001,Alice Martinez,Customer Success,CSM,86000,2019-03-24,Active
+EMP0002,Sam Jackson,Customer Success,CSM,59000,2018-02-07,Active
+EMP0003,Rachel Miller,Sales,Sales Rep,138000,2023-09-14,Active
+EMP0004,Zoe Smith,IT Operations,Security Engineer,85000,2023-07-11,Active
+EMP0005,Yara Anderson,Finance,Senior Analyst,83000,2018-07-04,Active
+EMP0006,Tara Martinez,Legal,Senior Counsel,193000,2018-12-15,Active
+EMP0007,Rachel Wilson,IT Operations,IT Support,111000,2022-04-23,Active
+EMP0008,Yara Wilson,Engineering,Senior Engineer,90000,2019-02-13,Active
+EMP0009,Frank Taylor,IT Operations,Security Engineer,110000,2019-11-09,Active
+EMP0010,Rachel Davis,Sales,Account Executive,75000,2021-07-09,Active
+EMP0011,Aaron Johnson,Customer Success,CS Team Lead,84000,2018-06-13,Active
+EMP0012,Diana Robinson,Engineering,Senior Engineer,171000,2020-04-21,On Leave
+EMP0013,Eve Martinez,IT Operations,IT Manager,82000,2019-12-18,Active
+EMP0014,Caleb Robinson,Customer Success,VP Customer Success,106000,2020-04-05,On Leave
+EMP0015,Beth Brown,Engineering,Software Engineer,99000,2023-03-26,On Leave
+EMP0016,Mia Thomas,Sales,Sales Rep,131000,2021-09-09,Active
+EMP0017,Victor Thompson,Customer Success,CSM,89000,2023-06-04,Active
+EMP0018,Olivia Smith,IT Operations,SysAdmin,98000,2022-03-17,Active
+EMP0019,Jack Martin,Legal,General Counsel,167000,2019-03-12,Active
+EMP0020,Tara Anderson,Sales,Sales Rep,117000,2018-02-12,Active
+EMP0021,Hank Robinson,Finance,Financial Analyst,80000,2018-12-16,Active
+EMP0022,Yara Jones,Legal,General Counsel,106000,2023-08-18,Active
+EMP0023,Grace Thompson,HR,CHRO,108000,2023-12-07,Active
+EMP0024,Olivia Martin,IT Operations,Security Engineer,122000,2018-04-08,Active
+EMP0025,Sam Thompson,HR,HR Coordinator,74000,2022-04-01,Active
+EMP0026,Hank Williams,Customer Success,CSM,59000,2020-02-17,Active
+EMP0027,Grace Thompson,HR,CHRO,68000,2023-10-19,On Leave
+EMP0028,Zoe Jackson,Finance,CFO,94000,2018-02-22,On Leave
+EMP0029,Nate White,HR,CHRO,115000,2023-01-22,Active
+EMP0030,Xander Anderson,Engineering,Engineering Manager,93000,2019-04-07,On Leave
+EMP0031,Frank Martinez,Finance,CFO,129000,2019-02-15,Active
+EMP0032,Carol Davis,Engineering,Software Engineer,101000,2021-08-16,Active
+EMP0033,Caleb Johnson,Legal,Senior Counsel,111000,2021-01-13,Active
+EMP0034,Jack Jackson,Legal,Senior Counsel,179000,2023-09-22,On Leave
+EMP0035,Jack Miller,Finance,Senior Analyst,77000,2022-12-18,Active
+EMP0036,Bob Johnson,Customer Success,CS Team Lead,116000,2022-09-06,Active
+EMP0037,Beth Garcia,Sales,Sales Rep,63000,2022-02-22,Active
+EMP0038,Caleb Robinson,IT Operations,IT Support,96000,2022-10-02,Active
+EMP0039,Diana Martinez,IT Operations,Security Engineer,91000,2023-12-11,Active
+EMP0040,Eve Wilson,HR,CHRO,89000,2020-02-01,On Leave
+EMP0041,Carol Thompson,Sales,Sales Rep,82000,2022-05-05,Active
+EMP0042,Leo Wilson,Engineering,Senior Engineer,100000,2021-09-23,Active
+EMP0043,Victor Thompson,Sales,Sales Rep,93000,2023-02-05,Active
+EMP0044,Xander Thompson,Engineering,Software Engineer,99000,2020-05-20,Active
+EMP0045,Grace Martinez,Customer Success,CS Team Lead,119000,2021-05-28,Active
+EMP0046,Aaron Martinez,Engineering,Engineering Manager,85000,2018-06-25,Active
+EMP0047,Frank White,Customer Success,CS Team Lead,109000,2022-01-04,Active
+EMP0048,Rachel Johnson,Customer Success,Senior CSM,102000,2022-09-05,On Leave
+EMP0049,Jack Taylor,Finance,Financial Analyst,75000,2020-04-22,Active
+EMP0050,Leo Thompson,Customer Success,CSM,107000,2022-12-05,Active
