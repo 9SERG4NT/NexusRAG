@@ -12,6 +12,7 @@ Login credentials:
 """
 
 from __future__ import annotations
+import asyncio
 import sys
 import html as _html
 from pathlib import Path
@@ -98,8 +99,8 @@ async def on_chat_start():
     init_msg = cl.Message(content="⏳ Loading knowledge base...", author="System")
     await init_msg.send()
 
-    # Warm up pipeline + guard (triggers auto-ingest if KB is empty)
-    get_guard()
+    # Run blocking model-load + ChromaDB init in a thread — keeps event loop free
+    await asyncio.to_thread(get_guard)
 
     await init_msg.remove()
 

@@ -14,8 +14,11 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Copy source
 COPY . .
 
-# Pre-create runtime dirs
-RUN mkdir -p data/chroma
+# Pre-download embedding model (public, no token needed) — bakes into image
+RUN python -c "from sentence_transformers import SentenceTransformer; SentenceTransformer('all-MiniLM-L6-v2')"
+
+# Pre-ingest all data into ChromaDB — bakes into image, zero startup delay
+RUN python ingest_all.py
 
 # HF Spaces injects secrets as env vars — do not bake them in
 ENV PYTHONUNBUFFERED=1
