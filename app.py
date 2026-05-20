@@ -43,13 +43,42 @@ ROLE_ACCESS = {
 
 CONF_EMOJI = {"HIGH": "🟢", "MEDIUM": "🟡", "LOW": "🔴"}
 
+GITHUB_SOURCE_URLS = {
+    "hr_policy.pdf":      "https://github.com/9SERG4NT/NexusRAG/blob/main/data/documents/hr_policy.pdf",
+    "finance_report.pdf": "https://github.com/9SERG4NT/NexusRAG/blob/main/data/documents/finance_report.pdf",
+    "it_security.pdf":    "https://github.com/9SERG4NT/NexusRAG/blob/main/data/documents/it_security.pdf",
+    "employees.csv":      "https://github.com/9SERG4NT/NexusRAG/blob/main/data/structured/employees.csv",
+    "incidents.csv":      "https://github.com/9SERG4NT/NexusRAG/blob/main/data/structured/incidents.csv",
+    "system_logs.json":   "https://github.com/9SERG4NT/NexusRAG/blob/main/data/logs/system_logs.json",
+}
+
+# A follow-up MUST (a) reference the previous answer with a pronoun/anaphora
+# AND (b) request a transformation. New queries that happen to mention "table"
+# (e.g. "Show Q4 revenue as a markdown table") are NOT follow-ups.
+_REFERENCE_WORDS = {"it", "that", "this", "those", "these"}
+_REFORMAT_WORDS  = {
+    "format", "reformat", "table", "list", "bullet", "bullets",
+    "summarize", "summarise", "rewrite", "rephrase", "elaborate",
+    "convert", "restructure", "show",
+}
+
+def _is_followup(query: str) -> bool:
+    q     = query.lower().strip()
+    words = q.replace(".", " ").replace(",", " ").replace("?", " ").split()
+    if len(words) > 10:
+        return False
+    has_reference = any(w in _REFERENCE_WORDS for w in words) \
+                    or "above" in q or "previous" in q
+    has_reformat  = any(w in _REFORMAT_WORDS for w in words)
+    return has_reference and has_reformat
+
 SAMPLE_QUERIES = [
-    ("📋  Maternity leave policy",       "What is the maternity leave policy at Acme Corp?"),
-    ("💰  Q4 revenue & budgets",         "What was the Q4 2024 total revenue and how are the department budgets allocated?"),
-    ("🚨  Critical errors in logs",      "Show me all critical and error level entries from the system logs"),
-    ("👥  Engineering salaries",         "Show me employee salaries in the Engineering department"),
-    ("🏠  Remote work policy",           "What is the remote work policy? How many days per week are allowed?"),
-    ("🔒  Password & MFA requirements",  "What are the IT password policy and MFA requirements?"),
+    ("📋  Maternity policy",     "What is the maternity leave policy at Acme Corp?"),
+    ("💰  Q4 revenue (table)",   "Show Q4 2024 revenue and department budget allocations as a markdown table."),
+    ("🚨  Critical logs (table)", "List all CRITICAL and ERROR log entries as a table with columns: Timestamp, Level, Service, Message."),
+    ("👥  Eng salaries (list)",  "List Engineering department employees with their roles and salaries as a numbered list."),
+    ("📊  Top 5 earners",        "Who are the top 5 highest-paid employees? Show as a markdown table with rank, name, role, salary."),
+    ("🔒  MFA requirements",     "What are the IT password and MFA requirements?"),
 ]
 
 # ── Pipeline + guard singletons ────────────────────────────────────────────────
@@ -141,6 +170,49 @@ async def on_message(message: cl.Message):
     await handle_query(message.content.strip())
 
 
+def _build_footer(result: dict, emoji: str, role: str) -> str:
+    conf       = result.get("confidence", 0.0)
+    conf_label = result.get("confidence_label", "LOW")
+    conf_e     = CONF_EMOJI.get(conf_label, "⚪")
+    all_cites  = result.get("citations") or result.get("all_retrieved_sources", [])
+
+    seen: set[str] = set()
+    rows: list[str] = []
+    for idx, c in enumerate(all_cites[:5], 1):
+        src = c.get("source", "unknown")
+        if src in seen:
+            continue
+        seen.add(src)
+        url   = GITHUB_SOURCE_URLS.get(src)
+        dept  = c.get("department", "?")
+        score = float(c.get("score", 0))
+        link  = f"[{src}]({url})" if url else f"`{src}`"
+        rows.append(f"| {idx} | {link} | `{dept}` | `{score:.3f}` |")
+
+    if rows:
+        table = (
+            "\n\n### 📚 References\n\n"
+            "| # | Source (GitHub) | Department | Relevance |\n"
+            "|---|---|---|---|\n"
+            + "\n".join(rows)
+        )
+    else:
+        table = ""
+
+    return (
+        f"\n\n---\n"
+        f"{conf_e} **Confidence:** {conf_label} `{conf:.0%}` | "
+        f"{emoji} **Role:** `{role}` | "
+        f"📄 **Sources:** {result.get('sources_used', 0)}"
+        f"{table}"
+    )
+
+
+async def _send_result(result: dict, emoji: str, role: str) -> None:
+    answer = result.get("answer", "No answer generated.")
+    await cl.Message(content=answer + _build_footer(result, emoji, role), author="NexusRAG").send()
+
+
 async def handle_query(query: str):
     user     = cl.user_session.get("user")
     username = user.identifier
@@ -169,6 +241,22 @@ async def handle_query(query: str):
     if query.lower().strip("!?., ") in _INSTANT_GREETINGS:
         await cl.Message(content=_GREETING_REPLY, author="NexusRAG").send()
         return
+
+    # ── Follow-up / reformatting request (reuse previous answer, skip RAG) ────
+    last_result = cl.user_session.get("last_result")
+    if last_result and _is_followup(query):
+        prev_answer = last_result.get("answer", "")
+        prev_citations = last_result.get("citations") or last_result.get("all_retrieved_sources", [])
+        if prev_answer:
+            async with cl.Step(name="🔄 Reformatting previous answer", type="tool") as step:
+                step.output = f"Follow-up detected — reusing {len(prev_citations)} prior citation(s)"
+            result = await asyncio.to_thread(
+                pipeline.generator.generate_followup,
+                query, prev_answer, prev_citations, username, role,
+            )
+            cl.user_session.set("last_result", result)
+            await _send_result(result, emoji, role)
+            return
 
     # ── Greeting / chitchat shortcut (very short social messages, needs guard) ─
     if len(query.split()) <= 4:
@@ -200,10 +288,10 @@ async def handle_query(query: str):
         ).send()
         return
 
-    # ── Retrieval step ────────────────────────────────────────────────────────
+    # ── Retrieval (RBAC + hybrid search) ─────────────────────────────────────
     async with cl.Step(name="🔍 Retrieving context", type="retrieval") as step:
-        result = pipeline.query(user=username, query=query)
-        info   = result.get("retrieval_info", {})
+        retrieve_data = await asyncio.to_thread(pipeline.retrieve_only, username, query)
+        info = retrieve_data.get("retrieval_info", {})
         step.output = (
             f"**Allowed depts:** {info.get('allowed_departments', [])}\n"
             f"**Preferred dept:** {info.get('preferred_department') or 'auto'}\n"
@@ -212,45 +300,28 @@ async def handle_query(query: str):
         )
 
     # ── RBAC access denied ────────────────────────────────────────────────────
-    if result.get("access_denied"):
+    if retrieve_data.get("access_denied"):
         await cl.Message(
-            content=f"🔒 **Access Denied**\n\n{result['answer']}",
+            content=f"🔒 **Access Denied**\n\n{retrieve_data['answer']}",
             author="NexusRAG",
         ).send()
         return
 
-    # ── Build citation side-elements ──────────────────────────────────────────
-    elements: list[cl.Text] = []
-    all_cites = result.get("citations") or result.get("all_retrieved_sources", [])
-    for c in all_cites[:5]:
-        elements.append(
-            cl.Text(
-                name=f"[{c['id']}] {c['source']}",
-                content=(
-                    f"**File:** `{c['source']}`\n"
-                    f"**Format:** {c.get('type', '?').upper()}\n"
-                    f"**Department:** `{c.get('department', '?')}`\n"
-                    f"**Relevance score:** {float(c.get('score', 0)):.3f}"
-                ),
-                display="side",
-            )
-        )
+    chunks        = retrieve_data["chunks"]
+    retrieval_info = retrieve_data["retrieval_info"]
 
-    # ── Final response ────────────────────────────────────────────────────────
-    conf       = result.get("confidence", 0.0)
-    conf_label = result.get("confidence_label", "LOW")
-    conf_e     = CONF_EMOJI.get(conf_label, "⚪")
-    answer     = result.get("answer", "No answer generated.")
+    # ── Generation: get full answer in thread, then stream everything ────────
+    raw_answer = await asyncio.to_thread(pipeline.generator.generate_raw, query, chunks)
+    result     = pipeline.generator.build_result(raw_answer, chunks, username, role, retrieval_info)
+    cl.user_session.set("last_result", result)
 
-    footer = (
-        f"\n\n---\n"
-        f"{conf_e} **Confidence:** {conf_label} `{conf:.0%}` &nbsp;|&nbsp; "
-        f"{emoji} **Role:** `{role}` &nbsp;|&nbsp; "
-        f"📄 **Sources:** {result.get('sources_used', 0)}"
-    )
+    # Combine answer + footer so both stream together (guaranteed to render)
+    full_output = raw_answer + _build_footer(result, emoji, role)
 
-    await cl.Message(
-        content=answer + footer,
-        elements=elements,
-        author="NexusRAG",
-    ).send()
+    msg = cl.Message(content="", author="NexusRAG")
+    await msg.send()
+    # Stream in small 4-char chunks for smooth ChatGPT-style typewriter effect
+    chunk_size = 4
+    for i in range(0, len(full_output), chunk_size):
+        await msg.stream_token(full_output[i:i + chunk_size])
+        await asyncio.sleep(0.012)

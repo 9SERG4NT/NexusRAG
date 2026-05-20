@@ -39,6 +39,19 @@ class EnterprisePipeline:
         self.store.add_chunks(chunks, embeddings)
         print(f"Auto-ingestion complete — {self.store.count()} chunks indexed.")
 
+    def retrieve_only(self, user: str, query: str, top_k: int = TOP_K_FINAL) -> dict:
+        """RBAC check + retrieval only — no generation. Returns chunks or access_denied."""
+        role = self.rbac.get_user_role(user)
+        if role is None:
+            return {"access_denied": True, "answer": f"Unknown user '{user}'.",
+                    "role": None, "chunks": [], "retrieval_info": {}}
+        allowed, reason = self.rbac.check_query_access(user, query)
+        if not allowed:
+            return {"access_denied": True, "answer": f"Access denied: {reason}",
+                    "role": role, "chunks": [], "retrieval_info": {}}
+        chunks, retrieval_info = self.retriever.retrieve(query, user, top_k=top_k)
+        return {"access_denied": False, "role": role, "chunks": chunks, "retrieval_info": retrieval_info}
+
     def query(self, user: str, query: str, top_k: int = TOP_K_FINAL) -> dict:
         """
         Full RAG pipeline for a user query.

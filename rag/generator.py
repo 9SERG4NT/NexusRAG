@@ -7,6 +7,7 @@ LLM answer generator.
 """
 
 from __future__ import annotations
+import asyncio
 import re
 import os
 
@@ -16,10 +17,34 @@ SYSTEM_PROMPT = """You are a secure enterprise knowledge assistant.
 Rules (non-negotiable):
 1. Answer ONLY using the provided context. Do NOT use outside knowledge.
 2. Cite every fact with [Source N] notation immediately after the statement.
-3. If the context does not contain the answer, respond EXACTLY with:
+3. When the user asks for a table, output RAW markdown table syntax directly.
+   DO NOT wrap tables in code fences (no triple backticks, no "```markdown").
+4. When the user asks for a list, use markdown bullets (-) or numbered (1.).
+5. If the context does not contain the answer, respond EXACTLY with:
    "I don't have sufficient information in the available sources to answer this question."
-4. Never reveal information about other users, their roles, or data they are not authorised to access.
-5. Be concise and professional."""
+   Do NOT append this fallback if you have already provided real content above.
+6. Never reveal information about other users, their roles, or data they are not authorised to access.
+7. Be concise and professional."""
+
+
+_FALLBACK = "I don't have sufficient information in the available sources to answer this question."
+
+
+def _clean_answer(answer: str) -> str:
+    """Strip markdown code fences wrapping tables and trailing 'no info' fallback."""
+    text = answer.strip()
+    # Strip leading ```markdown / ```md / ``` line so tables render as real tables
+    if text.startswith("```"):
+        first_nl = text.find("\n")
+        if first_nl != -1:
+            text = text[first_nl + 1:]
+    # Remove any standalone ``` lines anywhere in the body
+    text = "\n".join(line for line in text.split("\n") if line.strip() != "```").strip()
+    # Drop trailing fallback if any substantive content precedes it
+    idx = text.rfind(_FALLBACK)
+    if idx > 0 and text[:idx].strip():
+        text = text[:idx].rstrip()
+    return text
 
 USER_TEMPLATE = """Context:
 {context}
@@ -120,6 +145,15 @@ def _call_hf(system: str, user_msg: str, model: str, token: str) -> str:
         return completion.choices[0].message.content
 
 
+async def _stream_words(text: str, words_per_sec: int = 80):
+    """Yield words with timed delays to produce a smooth typing animation."""
+    delay = 1.0 / words_per_sec
+    words = text.split(" ")
+    for i, word in enumerate(words):
+        yield word + (" " if i < len(words) - 1 else "")
+        await asyncio.sleep(delay)
+
+
 def _extract_cited_sources(answer: str, citations: list[dict]) -> list[dict]:
     """Return only citations that are actually referenced in the answer text."""
     cited_ids = {int(m) for m in re.findall(r"\[Source (\d+)\]", answer)}
@@ -154,6 +188,62 @@ class Generator:
         lines = [ln for ln in user_msg.split("\n") if ln.strip() and not ln.startswith("[Source")]
         snippet = " ".join(lines[:3])[:300]
         return f"[MOCK — no API key configured] Based on context: {snippet} [Source 1]"
+
+    def generate_raw(self, query: str, chunks: list[dict]) -> str:
+        """Return the cleaned LLM answer string (no metadata). Runs synchronously."""
+        if not chunks:
+            return _FALLBACK
+        context_text, _ = _build_context_block(chunks)
+        user_msg = USER_TEMPLATE.format(context=context_text, question=query)
+        return _clean_answer(self._call_llm(SYSTEM_PROMPT, user_msg))
+
+    def build_result(self, answer: str, chunks: list[dict], username: str, role: str,
+                     retrieval_info: dict | None = None) -> dict:
+        """Build full result dict from an accumulated streamed answer."""
+        _, citations = _build_context_block(chunks)
+        cited = _extract_cited_sources(answer, citations)
+        confidence = _compute_confidence(chunks)
+        return {
+            "answer": answer,
+            "citations": cited,
+            "all_retrieved_sources": citations,
+            "confidence": confidence,
+            "confidence_label": _confidence_label(confidence),
+            "user": username,
+            "role": role,
+            "sources_used": len(cited) or len(chunks),
+            "retrieval_info": retrieval_info or {},
+        }
+
+    def generate_followup(
+        self,
+        query: str,
+        prev_answer: str,
+        prev_citations: list[dict],
+        username: str,
+        role: str,
+    ) -> dict:
+        """Handle follow-up / reformatting requests without a new RAG lookup."""
+        system = (
+            "You are a helpful assistant. The user has a follow-up request about a "
+            "previous answer. Fulfil the request using ONLY the information already "
+            "present in the previous answer. Do not add new facts or outside knowledge. "
+            "If the request is to format as a table, use Markdown table syntax."
+        )
+        user_msg = f"Previous answer:\n{prev_answer}\n\nFollow-up request: {query}"
+        answer = self._call_llm(system, user_msg)
+        conf = _compute_confidence([{"hybrid_score": 0.85}])
+        return {
+            "answer": answer,
+            "citations": prev_citations,
+            "all_retrieved_sources": prev_citations,
+            "confidence": conf,
+            "confidence_label": _confidence_label(conf),
+            "user": username,
+            "role": role,
+            "sources_used": len(prev_citations),
+            "retrieval_info": {"followup": True},
+        }
 
     def generate(
         self,

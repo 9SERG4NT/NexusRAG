@@ -3,12 +3,44 @@
    Covers: login quick-buttons, branding, light/dark theme vars
 ═══════════════════════════════════════════════ */
 
-/* ── Hide default "Chainlit" branding in header ── */
-header a[href="/"],
+/* ── Wider chat messages so markdown tables don't get cramped ── */
+.message-container,
+[class*="MessageWrapper"],
+[class*="message-content"] {
+  max-width: 100% !important;
+}
+
+/* Make markdown tables in messages render with proper borders + spacing */
+[class*="message"] table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 8px 0;
+  font-size: 13px;
+}
+[class*="message"] table th,
+[class*="message"] table td {
+  border: 1px solid rgba(120, 120, 120, 0.3);
+  padding: 6px 10px;
+  text-align: left;
+}
+[class*="message"] table th {
+  background: rgba(99, 102, 241, 0.12);
+  font-weight: 600;
+}
+[class*="message"] table tr:nth-child(even) td {
+  background: rgba(99, 102, 241, 0.04);
+}
+
+/* ── Hide all default Chainlit branding (header + footer + watermark) ── */
 header img[alt="logo"],
 .header-title,
 [class*="watermark"],
-[class*="powered-by"] {
+[class*="powered-by"],
+a[href*="chainlit.io"],
+a[href*="github.com/Chainlit"],
+a[href*="github.com/chainlit"],
+[class*="footer-link"],
+[class*="built-with"] {
   display: none !important;
 }
 
@@ -135,6 +167,227 @@ header img[alt="logo"],
   font-size: 11px;
   opacity: 0.65;
   line-height: 1.2;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   LOGIN PAGE — modern glass-morphism redesign
+   Activated when <body> has class "nx-login" (set by custom.js)
+═══════════════════════════════════════════════════════════════ */
+
+/* Full-page gradient background with subtle animated mesh */
+body.nx-login {
+  background:
+    radial-gradient(circle at 12% 18%, rgba(220,38,38,0.30), transparent 42%),
+    radial-gradient(circle at 88% 78%, rgba(185,28,28,0.22), transparent 45%),
+    radial-gradient(circle at 50% 100%, rgba(239,68,68,0.16), transparent 50%),
+    linear-gradient(135deg, #0d0808 0%, #1a0c0c 55%, #0d0808 100%) !important;
+  background-attachment: fixed;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+body.nx-login::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background:
+    radial-gradient(circle at 30% 30%, rgba(220,38,38,0.12), transparent 35%),
+    radial-gradient(circle at 70% 70%, rgba(185,28,28,0.10), transparent 35%);
+  animation: nxFloat 18s ease-in-out infinite alternate;
+  pointer-events: none;
+  z-index: 0;
+}
+@keyframes nxFloat {
+  0%   { transform: translate(0, 0) scale(1); }
+  100% { transform: translate(40px, -30px) scale(1.08); }
+}
+
+/* Wrap the login card in a glass container */
+body.nx-login #root > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* The Chainlit login card itself */
+body.nx-login form {
+  background: rgba(22, 10, 10, 0.70) !important;
+  backdrop-filter: blur(18px) saturate(140%);
+  -webkit-backdrop-filter: blur(18px) saturate(140%);
+  border: 1px solid rgba(220, 38, 38, 0.18) !important;
+  border-radius: 20px !important;
+  box-shadow:
+    0 24px 60px rgba(0, 0, 0, 0.55),
+    0 0 0 1px rgba(220, 38, 38, 0.10),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05) !important;
+  padding: 36px 30px 28px !important;
+  max-width: 440px !important;
+  width: 92vw !important;
+  animation: nxCardIn 0.55s cubic-bezier(0.16, 1, 0.3, 1);
+}
+@keyframes nxCardIn {
+  0%   { opacity: 0; transform: translateY(14px) scale(0.985); }
+  100% { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* Brand header (injected by custom.js) */
+#nx-brand {
+  text-align: center;
+  margin: -8px 0 20px;
+  animation: nxFadeUp 0.6s 0.05s both cubic-bezier(0.16, 1, 0.3, 1);
+}
+#nx-brand .nx-logo {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 72px; height: 72px;
+  border-radius: 20px;
+  background: linear-gradient(135deg, #dc2626 0%, #7f1d1d 100%);
+  box-shadow:
+    0 10px 28px rgba(220, 38, 38, 0.45),
+    inset 0 1px 0 rgba(255,255,255,0.18);
+  margin-bottom: 14px;
+  animation: nxPulse 3.5s ease-in-out infinite;
+  overflow: hidden;
+}
+#nx-brand .nx-logo svg {
+  width: 42px;
+  height: 42px;
+  display: block;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.25));
+}
+@keyframes nxPulse {
+  0%, 100% { box-shadow: 0 10px 28px rgba(220,38,38,0.50); }
+  50%      { box-shadow: 0 14px 36px rgba(239,68,68,0.65); }
+}
+#nx-brand .nx-title {
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: #f1f5f9;
+  margin: 0 0 4px;
+}
+#nx-brand .nx-title .nx-gradient {
+  background: linear-gradient(135deg, #f87171 0%, #fca5a5 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+#nx-brand .nx-sub {
+  font-size: 12px;
+  color: #94a3b8;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  margin: 0;
+}
+
+@keyframes nxFadeUp {
+  0%   { opacity: 0; transform: translateY(8px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+/* Style the username/password input fields */
+body.nx-login form input[type="text"],
+body.nx-login form input[type="email"],
+body.nx-login form input[type="password"] {
+  background: rgba(255, 255, 255, 0.04) !important;
+  border: 1px solid rgba(255, 255, 255, 0.10) !important;
+  border-radius: 11px !important;
+  color: #f1f5f9 !important;
+  padding: 12px 14px !important;
+  font-size: 14px !important;
+  width: 100% !important;
+  transition: border-color 0.18s, background 0.18s, box-shadow 0.18s !important;
+}
+body.nx-login form input:focus {
+  border-color: rgba(220, 38, 38, 0.65) !important;
+  background: rgba(255, 255, 255, 0.07) !important;
+  box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.20) !important;
+  outline: none !important;
+}
+body.nx-login form input::placeholder { color: #64748b !important; }
+
+/* Labels above inputs */
+body.nx-login form label {
+  color: #cbd5e1 !important;
+  font-size: 12px !important;
+  font-weight: 500 !important;
+  letter-spacing: 0.02em !important;
+}
+
+/* The primary submit button (Sign in / Continue) */
+body.nx-login form button[type="submit"] {
+  background: linear-gradient(135deg, #dc2626 0%, #991b1b 100%) !important;
+  border: none !important;
+  border-radius: 11px !important;
+  color: #fff !important;
+  font-weight: 600 !important;
+  font-size: 14px !important;
+  letter-spacing: 0.02em !important;
+  padding: 12px !important;
+  width: 100% !important;
+  cursor: pointer !important;
+  box-shadow: 0 8px 20px rgba(220, 38, 38, 0.35) !important;
+  transition: transform 0.12s, box-shadow 0.18s, filter 0.18s !important;
+}
+body.nx-login form button[type="submit"]:hover {
+  transform: translateY(-1px);
+  filter: brightness(1.10);
+  box-shadow: 0 12px 28px rgba(220, 38, 38, 0.50) !important;
+}
+body.nx-login form button[type="submit"]:active { transform: translateY(0); }
+
+/* Improved quick-login panel inside the new card */
+body.nx-login #rag-quick-login {
+  margin-top: 22px;
+  animation: nxFadeUp 0.6s 0.18s both cubic-bezier(0.16, 1, 0.3, 1);
+}
+body.nx-login .rag-divider span {
+  color: #94a3b8;
+  font-size: 10px;
+}
+body.nx-login .rag-divider::before,
+body.nx-login .rag-divider::after {
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.18), transparent);
+}
+body.nx-login .rag-hint {
+  color: #94a3b8;
+  font-size: 11px;
+}
+
+body.nx-login .rag-btn {
+  background: rgba(255, 255, 255, 0.04) !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+  border-radius: 12px !important;
+  padding: 11px 13px !important;
+  transition: transform 0.12s, background 0.18s, border-color 0.18s, box-shadow 0.18s !important;
+}
+body.nx-login .rag-btn:hover {
+  background: rgba(var(--rgb), 0.18) !important;
+  border-color: rgba(var(--rgb), 0.50) !important;
+  box-shadow: 0 6px 16px rgba(var(--rgb), 0.22);
+  transform: translateY(-2px);
+}
+body.nx-login .rag-i strong { color: #f1f5f9; font-size: 13px; }
+body.nx-login .rag-i small  { color: #94a3b8; font-size: 11px; }
+
+/* Tech-stack footer (injected) */
+#nx-footer {
+  margin-top: 22px;
+  text-align: center;
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #64748b;
+  animation: nxFadeUp 0.6s 0.32s both cubic-bezier(0.16, 1, 0.3, 1);
+}
+#nx-footer .nx-badge {
+  display: inline-block;
+  padding: 3px 9px;
+  margin: 0 3px;
+  background: rgba(220, 38, 38, 0.08);
+  border: 1px solid rgba(220, 38, 38, 0.22);
+  border-radius: 999px;
+  color: #fca5a5;
 }
 
 /* ─────────────────────────────────────────────
